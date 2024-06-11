@@ -14,18 +14,18 @@ import com.banking.service.BalanceInquiryService;
 @RestController
 @RequestMapping("/api")
 public class BalanceInquiryController {
-	
-	 @Autowired
-	    private BalanceInquiryService balanceInquiryService;
 
-	    @PostMapping("/accountBalance")
-	    public ResponseEntity<Double> getBalance(@RequestBody BalanceInquiryRequest request) {
-	        try {
-	            Double balance = balanceInquiryService.getBalance(request.getEmail());
-	            return ResponseEntity.ok(balance);
-	        } catch (Exception e) {
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	        }
-	    }
+	@Autowired
+	private BalanceInquiryService balanceInquiryService;
+
+	@PostMapping("/accountBalance")
+	public ResponseEntity<String> getBalance(@RequestBody BalanceInquiryRequest request) {
+		try {
+			Double balance = balanceInquiryService.getBalance(request.getEmail());
+			return ResponseEntity.ok("User Balance " + balance);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
 
 }

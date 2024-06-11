@@ -33,7 +33,7 @@ public class FundTransferServiceImpl implements FundTransferService {
 			throw new RuntimeException("Insufficient funds");
 		}
 
-		sender.setBalance(sender.getBalance() - request.getAmount());
+		sender.setBalance(sender.getBalance() - request.getAmount());		
 		recipient.setBalance(recipient.getBalance() + request.getAmount());
 
 		userRepository.save(sender);

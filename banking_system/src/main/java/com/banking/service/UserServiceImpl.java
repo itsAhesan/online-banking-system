@@ -20,8 +20,10 @@ public class UserServiceImpl implements UserService{
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public User registerUser(User user) {					
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+    public User registerUser(User user) {	
+    	
+    //	userRepository.findByEmail(user.getEmail()).orElse(null);
+        if (userRepository.findByEmail(user.getEmail()).orElse(null) != null) {
             throw new IllegalArgumentException("Email already in use");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
